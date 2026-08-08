@@ -9,10 +9,6 @@ import {
 } from "react-router-dom";
 import "./App.css";
 
-/* =========================
-   PROTECTED ROUTE
-========================= */
-
 function ProtectedRoute({ children }) {
   const isLoggedIn = localStorage.getItem("abtalks_logged_in");
 
@@ -22,10 +18,6 @@ function ProtectedRoute({ children }) {
 
   return children;
 }
-
-/* =========================
-   SIGN IN
-========================= */
 
 function SignIn() {
   const navigate = useNavigate();
@@ -195,10 +187,6 @@ function SignIn() {
   );
 }
 
-/* =========================
-   LANDING PAGE
-========================= */
-
 function Landing() {
   return (
     <main className="app">
@@ -330,10 +318,6 @@ function Landing() {
   );
 }
 
-/* =========================
-   DASHBOARD
-========================= */
-
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -348,7 +332,9 @@ function Dashboard() {
     <main className="dashboard">
       <header className="dashboard-header">
         <div>
-          <div className="section-label">ABTALKS / 60-DAY CHALLENGE</div>
+          <div className="section-label">
+            ABTALKS / 60-DAY CHALLENGE
+          </div>
 
           <h1>Good evening, {name}.</h1>
 
@@ -386,6 +372,7 @@ function Dashboard() {
         <div className="progress-heading">
           <div>
             <p className="card-label">CHALLENGE PROGRESS</p>
+
             <h2>Day 21 of 60</h2>
           </div>
 
@@ -470,10 +457,6 @@ function Dashboard() {
     </main>
   );
 }
-
-/* =========================
-   CHALLENGE DAY
-========================= */
 
 function ChallengeDay() {
   const [submitted, setSubmitted] = React.useState(false);
@@ -616,10 +599,6 @@ function ChallengeDay() {
     </main>
   );
 }
-
-/* =========================
-   APP
-========================= */
 
 function App() {
   return (
