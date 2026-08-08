@@ -1,51 +1,105 @@
-# ABTalks 60-Day Challenge Redesign
+# ABTalks Redesign
 
-A mobile-first redesign of the ABTalks 60-Day Coding Challenge,
-built for ViCodathon 2026.
+A mobile-first redesign of the ABTalks 60-Day Coding Challenge, created for ViCodathon 2026.
+
+## Live Demo
+
+Coming soon.
 
 ## Problem Statement
 
-Redesign ABTalks to make the 60-day coding challenge clearer,
-more motivating, and easier to use on mobile devices.
+Redesign ABTalks as a motivating, mobile-first experience for Indian college students completing a 60-day coding challenge.
 
-## Required Routes
+The experience focuses on:
 
-- `/`
-- `/dashboard`
-- `/day/12`
+- Daily coding missions
+- Learning streaks
+- Progress tracking
+- GitHub proof of work
+- LinkedIn proof of work
+- Recovery after missed days
+- Clear visibility of student achievements
 
-## Core Idea
+## Routes
 
-Learn → Build → Prove → Grow
+The application contains the three required routes:
 
-The experience focuses on helping students build consistency
-through daily coding, public proof of work, and visible progress.
+/
+ /dashboard
+ /day/12
 
-## Standout Feature
+## Key Features
 
-### Streak Rescue
+### Landing Page
 
-When a student misses a challenge day, instead of simply losing
-their motivation, the product provides a recovery path that helps
-them get back on track.
+Introduces the ABTalks challenge and explains how students can:
+
+1. Pick a track
+2. Build every day
+3. Prove their work
+
+### Student Dashboard
+
+Shows:
+
+- Current streak
+- Challenge progress
+- Today's mission
+- Achievements
+- Proof-of-work progress
+- Smart recovery experience
+
+### Challenge Day
+
+Provides:
+
+- Daily mission
+- Requirements
+- Quality checklist
+- GitHub proof field
+- LinkedIn proof field
+- Proof submission confirmation
+
+## Thoughtful Product Idea
+
+### Momentum Recovery
+
+Missing one day should not make a student abandon a 60-day challenge.
+
+The redesign introduces a lightweight recovery experience that encourages students to complete today's mission first and then complete a smaller recovery task.
+
+The goal is to protect long-term consistency instead of punishing a missed day.
+
+## Edge Cases Considered
+
+The design considers:
+
+- First day with no streak
+- Missed days
+- Empty or incomplete student profiles
+- Mobile-first usage
+- 390px viewport constraints
 
 ## Tech Stack
 
 - React
 - Vite
-- JavaScript
-- Tailwind CSS
 - React Router
-- Lucide Icons
+- CSS
+- Mock data
+
+## Design Principles
+
+- Mobile-first
+- Minimal and focused
+- Clear hierarchy
+- Fast understanding
+- Strong calls to action
+- Proof-of-work visibility
 
 ## Development
 
-This project is being built during ViCodathon 2026 with AI-assisted
-development. The AI usage log is available in `PROMPTS.md`.
+Install dependencies:
 
-## Routes
-
-```text
-/
-/dashboard
-/day/12
+```bash
+npm install

@@ -1,70 +1,68 @@
-# abtalks-redesign
 # AI Usage Log — ViCodathon 2026
 
 ## Project
 ABTalks Redesign
 
-## Problem Statement
-Problem Statement 1 — Redesign ABTalks
+## AI-Assisted Development
 
----
+AI tools were used throughout the development process for ideation,
+UI planning, React implementation, responsive CSS, debugging, and
+improving the user experience.
 
-## Prompt 01 — Problem Analysis
+## Prompt 1 — Product Direction
 
-I received the ViCodathon 2026 problem statement for "Redesign ABTalks".
-Analyze the requirements, constraints, required routes, judging considerations,
-and identify the best approach for a solo developer working within 48 hours.
+I am participating in ViCodathon 2026 and selected the ABTalks redesign
+problem statement. Help me plan a mobile-first experience for a 60-day
+coding challenge that makes student progress and proof of work visible.
 
----
+## Prompt 2 — Landing Page
 
-## Prompt 02 — Product Strategy
+Design a clean, premium, mobile-first landing page for ABTalks.
+The page should clearly explain the 60-day challenge, build motivation,
+and encourage students to start.
 
-Help me design a mobile-first ABTalks redesign that solves the actual problems
-faced by college students completing a 60-day coding challenge.
+## Prompt 3 — Student Dashboard
 
-The required routes are:
+Create a student dashboard showing current streak, challenge progress,
+today's coding mission, achievements, and proof-of-work status.
+The interface should work well at a 390px mobile viewport.
+
+## Prompt 4 — Challenge Day
+
+Create a complete challenge-day experience containing the daily task,
+requirements, quality checklist, GitHub proof field, LinkedIn proof
+field, and a submission confirmation state.
+
+## Prompt 5 — UX Improvement
+
+Suggest a thoughtful feature for students who miss a challenge day.
+The solution should encourage recovery instead of making students feel
+that their progress has been lost.
+
+## Prompt 6 — Responsive Design
+
+Review the interface for a 390px mobile viewport and improve spacing,
+typography, buttons, cards, and form fields so the application remains
+usable without horizontal scrolling.
+
+## Prompt 7 — Debugging
+
+Help identify and fix React JSX syntax errors and routing issues while
+building the three required routes.
+
+## Prompt 8 — Documentation
+
+Help document the project, its routes, features, design decisions,
+edge cases, and AI-assisted development process.
+
+## Human Decisions
+
+The final product direction, feature selection, content, visual
+hierarchy, and implementation decisions were reviewed and adjusted
+during development.
+
+## Final Routes
+
 /
  /dashboard
-/day/12
-
-The design must work especially well at a 390px mobile viewport.
-
----
-
-## Prompt 03 — Differentiating Feature
-
-Suggest thoughtful product features that can improve the experience of students
-who are trying to maintain consistency during a 60-day coding challenge.
-
----
-
-## Prompt 04 — UX Planning
-
-Create a UX structure for the three required screens:
-landing page, student dashboard, and challenge day.
-
-Prioritize clarity, motivation, progress visibility, and proof-of-work submission.
-
----
-
-## Prompt 05 — Development
-
-[Add the actual prompts used during implementation here.]
-
----
-
-## Prompt 06 — Debugging
-
-[Add actual debugging prompts used during development here.]
-
----
-
-## Prompt 07 — UI/UX Improvements
-
-[Add actual prompts used to improve the interface here.]
-
----
-
-## Prompt 08 — Final Testing
-
-[Add actual prompts used for testing and final review here.]
+ /day/12
