@@ -5,8 +5,195 @@ import {
   Route,
   Link,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import "./App.css";
+
+/* =========================
+   PROTECTED ROUTE
+========================= */
+
+function ProtectedRoute({ children }) {
+  const isLoggedIn = localStorage.getItem("abtalks_logged_in");
+
+  if (!isLoggedIn) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  return children;
+}
+
+/* =========================
+   SIGN IN
+========================= */
+
+function SignIn() {
+  const navigate = useNavigate();
+
+  const [isSignUp, setIsSignUp] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [error, setError] = React.useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (isSignUp && !name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    if (!email.trim()) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    if (!password.trim()) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (isSignUp) {
+      localStorage.setItem("abtalks_name", name.trim());
+    } else if (!localStorage.getItem("abtalks_name")) {
+      localStorage.setItem("abtalks_name", "Rahul");
+    }
+
+    localStorage.setItem("abtalks_email", email.trim());
+    localStorage.setItem("abtalks_logged_in", "true");
+
+    navigate("/dashboard");
+  };
+
+  return (
+    <main className="auth-page">
+      <div className="auth-card">
+        <Link to="/" className="auth-logo">
+          <span className="logo-dot"></span>
+          ABTalks
+        </Link>
+
+        <div className="auth-content">
+          <p className="section-label">
+            {isSignUp ? "JOIN ABTALKS" : "WELCOME BACK"}
+          </p>
+
+          <h1>
+            {isSignUp ? (
+              <>
+                Start your
+                <br />
+                <span>60-day journey.</span>
+              </>
+            ) : (
+              <>
+                Welcome
+                <br />
+                <span>back.</span>
+              </>
+            )}
+          </h1>
+
+          <p className="auth-subtitle">
+            {isSignUp
+              ? "Create your account and start building every day."
+              : "Sign in to continue your coding journey."}
+          </p>
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            {isSignUp && (
+              <div>
+                <label className="input-label" htmlFor="name">
+                  NAME
+                </label>
+
+                <input
+                  id="name"
+                  className="proof-input"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your name"
+                  autoComplete="name"
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="input-label" htmlFor="email">
+                EMAIL
+              </label>
+
+              <input
+                id="email"
+                className="proof-input"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                autoComplete="email"
+              />
+            </div>
+
+            <div>
+              <label className="input-label" htmlFor="password">
+                PASSWORD
+              </label>
+
+              <input
+                id="password"
+                className="proof-input"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Minimum 6 characters"
+                autoComplete={
+                  isSignUp ? "new-password" : "current-password"
+                }
+              />
+            </div>
+
+            {error && <p className="auth-error">{error}</p>}
+
+            <button type="submit" className="primary-btn auth-submit">
+              {isSignUp ? "Create account" : "Sign in"}
+              <span>→</span>
+            </button>
+          </form>
+
+          <div className="auth-switch">
+            <span>
+              {isSignUp
+                ? "Already have an account?"
+                : "Don't have an account?"}
+            </span>
+
+            <button
+              type="button"
+              onClick={() => {
+                setIsSignUp(!isSignUp);
+                setError("");
+              }}
+            >
+              {isSignUp ? "Sign in" : "Sign up"}
+            </button>
+          </div>
+
+          <Link to="/" className="auth-back">
+            ← Back to home
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}
 
 /* =========================
    LANDING PAGE
@@ -16,10 +203,10 @@ function Landing() {
   return (
     <main className="app">
       <nav className="navbar">
-        <div className="logo">
+        <Link to="/" className="logo">
           <span className="logo-dot"></span>
           ABTalks
-        </div>
+        </Link>
 
         <Link to="/signin" className="login-btn">
           Sign in
@@ -40,7 +227,7 @@ function Landing() {
           can actually see.
         </p>
 
-        <Link to="/dashboard" className="primary-btn">
+        <Link to="/signin" className="primary-btn">
           Start your 60-day journey <span>→</span>
         </Link>
 
@@ -70,6 +257,7 @@ function Landing() {
         <div className="steps">
           <div className="step">
             <div className="step-number">01</div>
+
             <div>
               <h3>Pick your track</h3>
               <p>Choose a path that matches where you want to grow.</p>
@@ -78,6 +266,7 @@ function Landing() {
 
           <div className="step">
             <div className="step-number">02</div>
+
             <div>
               <h3>Build every day</h3>
               <p>Complete one practical coding mission each day.</p>
@@ -86,6 +275,7 @@ function Landing() {
 
           <div className="step">
             <div className="step-number">03</div>
+
             <div>
               <h3>Prove your work</h3>
               <p>Submit your GitHub commit and LinkedIn post.</p>
@@ -123,7 +313,7 @@ function Landing() {
           <span>Show the world.</span>
         </h2>
 
-        <Link to="/dashboard" className="primary-btn">
+        <Link to="/signin" className="primary-btn">
           Start building <span>→</span>
         </Link>
       </section>
@@ -141,109 +331,17 @@ function Landing() {
 }
 
 /* =========================
-   SIGN IN
-========================= */
-
-function SignIn() {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    setError("");
-
-    if (!email.trim()) {
-      setError("Please enter your email.");
-      return;
-    }
-
-    if (!password.trim()) {
-      setError("Please enter your password.");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
-      return;
-    }
-
-    const user = {
-      email: email.trim(),
-      name: email.split("@")[0],
-    };
-
-    localStorage.setItem("abtalks_user", JSON.stringify(user));
-
-    window.location.href = "/dashboard";
-  };
-
-  return (
-    <main className="auth-page">
-      <div className="auth-card">
-        <Link to="/" className="logo auth-logo">
-          <span className="logo-dot"></span>
-          ABTalks
-        </Link>
-
-        <div className="section-label">WELCOME BACK</div>
-
-        <h1>Sign in</h1>
-
-        <p className="auth-subtitle">
-          Continue your 60-day coding journey.
-        </p>
-
-        <form onSubmit={handleSubmit}>
-          <label className="input-label">Email</label>
-
-          <input
-            className="proof-input"
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-          />
-
-          <label className="input-label">Password</label>
-
-          <input
-            className="proof-input"
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-          />
-
-          {error && <p className="auth-error">{error}</p>}
-
-          <button type="submit" className="primary-btn auth-button">
-            Sign in
-            <span>→</span>
-          </button>
-        </form>
-
-        <Link to="/" className="back-link auth-back">
-          ← Back to home
-        </Link>
-      </div>
-    </main>
-  );
-}
-
-/* =========================
    DASHBOARD
 ========================= */
 
 function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("abtalks_user") || "null");
+  const navigate = useNavigate();
+
+  const name = localStorage.getItem("abtalks_name") || "Rahul";
 
   const handleLogout = () => {
-    localStorage.removeItem("abtalks_user");
-    window.location.href = "/";
+    localStorage.removeItem("abtalks_logged_in");
+    navigate("/signin");
   };
 
   return (
@@ -252,11 +350,7 @@ function Dashboard() {
         <div>
           <div className="section-label">ABTALKS / 60-DAY CHALLENGE</div>
 
-          <h1>
-            Good evening,
-            <br />
-            {user?.name || "Rahul"}.
-          </h1>
+          <h1>Good evening, {name}.</h1>
 
           <p className="dashboard-subtitle">
             Keep your momentum going. Your next proof of work is waiting.
@@ -312,6 +406,7 @@ function Dashboard() {
         <div className="today-top">
           <div>
             <p className="card-label">TODAY'S MISSION</p>
+
             <h2>Build a responsive portfolio card</h2>
           </div>
 
@@ -382,14 +477,14 @@ function Dashboard() {
 
 function ChallengeDay() {
   const [submitted, setSubmitted] = React.useState(false);
+
   const [github, setGithub] = React.useState("");
   const [linkedin, setLinkedin] = React.useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!github || !linkedin) {
-      alert("Please add both GitHub and LinkedIn links.");
+    if (!github.trim() || !linkedin.trim()) {
       return;
     }
 
@@ -464,26 +559,30 @@ function ChallengeDay() {
         </p>
 
         <form onSubmit={handleSubmit}>
-          <label className="input-label">
-            GitHub repository / commit
+          <label className="input-label" htmlFor="github">
+            GITHUB REPOSITORY / COMMIT
           </label>
 
           <input
+            id="github"
             className="proof-input"
             type="url"
-            placeholder="https://github.com/yourname/project"
             value={github}
             onChange={(e) => setGithub(e.target.value)}
+            placeholder="https://github.com/yourname/project"
           />
 
-          <label className="input-label">LinkedIn post</label>
+          <label className="input-label" htmlFor="linkedin">
+            LINKEDIN POST
+          </label>
 
           <input
+            id="linkedin"
             className="proof-input"
             type="url"
-            placeholder="https://linkedin.com/posts/..."
             value={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
+            placeholder="https://linkedin.com/posts/..."
           />
 
           <button type="submit" className="primary-btn submit-btn">
@@ -516,20 +615,6 @@ function ChallengeDay() {
       </section>
     </main>
   );
-}
-
-/* =========================
-   PROTECTED ROUTE
-========================= */
-
-function ProtectedRoute({ children }) {
-  const user = localStorage.getItem("abtalks_user");
-
-  if (!user) {
-    return <Navigate to="/signin" replace />;
-  }
-
-  return children;
 }
 
 /* =========================
